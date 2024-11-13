@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">
+
+
+	<!-- 빈 자동 생성 -->
+	<context:component-scan base-package="service"></context:component-scan>
+	<context:component-scan
+		base-package="repository"></context:component-scan>
+
+	<!-- db.properties 지정 -->
+	<context:property-placeholder
+		location="classpath:config/db.properties" />
+	<!-- 1. DataSource 객체 빈 생성 -->
+	<bean id="dataSource"
+		class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="${jdbc.driver}"></property>
+		<property name="url" value="${jdbc.url}"></property>
+		<property name="username" value="${jdbc.username}"></property>
+		<property name="password" value="${jdbc.password}"></property>
+	</bean>
+
+	<!-- 2. Spring과 Mybatis 연동(기존 mybatis-config.xml에 있던것들) -->
+	<bean id="sqlSession"
+		class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property> <!-- dataSource 객체 연결 -->
+		<property name="mapperLocations"
+			value="classpath:mapper/*.xml"></property>	<!-- mapperLocations 속성으로 mapper가 있는 패키지 속 전체 매퍼 xml파일 지정 -->
+		<property name="typeAliases">	<!-- db entity 클래스 지정 -->
+			<list>
+				<value>entity.Member</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- SqlSessionFactoryBean과 BasicDataSource로 SqlSessionTemplate 생성 -->
+	<bean class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="sqlSession" />
+	</bean>
+</beans>

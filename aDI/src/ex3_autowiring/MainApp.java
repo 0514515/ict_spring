@@ -8,7 +8,7 @@ public class MainApp {
 	public static void main(String[] args) {
 		ApplicationContext context = new ClassPathXmlApplicationContext("ex3_autowiring/beans.xml");
 		
-		MessageBean bean = context.getBean("message",MessageBean.class);
+		MessageBean bean = context.getBean("messageBeanImpl",MessageBeanImpl.class);
 		bean.sayHello();
 	}
 }

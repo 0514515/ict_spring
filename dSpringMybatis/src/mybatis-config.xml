@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>	
+	<!-- DB 연동부분은 스프링 설정파일로 이동 -->
+
+
+	<!-- Alias 설정 -->
+<!-- 	<typeAliases>
+		<typeAlias type="board.vo.BoardVO" alias="BoardVO"/>
+	</typeAliases> -->
+	
+	<!-- Sql Mapper 설정 (Spring 설정으로 옮김) 
+	여기서 매퍼를 하나하나 지정하는 것 보다 spring에서 *.xml이 인식이 되기 때문에 옮겼음--> 
+<!-- 	<mappers>
+		<mapper resource="mappings/board-mapping.xml"/>
+	</mappers> -->
+	
+	
+<!-- 여기까지 다 옮겼으면 이것은 필요없음(강사님이 지우라고 했으니까) -->
+</configuration>
